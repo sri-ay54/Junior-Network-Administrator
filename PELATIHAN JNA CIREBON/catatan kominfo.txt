@@ -1,0 +1,125 @@
+.. Router ke PC
+ena
+conf t
+host CIREBON
+int fa3/0
+ip add 192.168.10.1 255.255.255.252
+no shut
+end
+exit
+host JAKARTA
+int fa0/0
+ip add 192.168.20.1 255.255.255.252
+no shut
+end 
+copy run start
+
+
+
+exit
+exit
+write
+
+.. router ke router
+int fa3/0
+ip add 10.10.10.10 255.255.255.252
+no shut
+end
+exit
+int fa2/0
+ip add 10.10.10.4 255.255.255.252
+no shut
+
+.. SWITCH
+en
+conf t
+h LT.1
+
+
+ena 
+conf t
+vlan 10
+name AYU
+
+.. ini latihan yang banyak
+ena
+conf t
+host LT.2
+vlan 10
+name ADM
+exit
+vlan 20
+name FO
+exit
+int fa0/1
+sw access vlan 10
+exit
+int fa0/2
+sw access vlan 20
+exit
+exit
+copy run start
+
+
+conf t
+int fa0/
+
+
+.. ini yang router ke router
+ena
+conf t
+host CIREBON
+int fa0/0
+ip add 192.168.10.1 255.255.255.252
+no shut
+int se2/0
+ip add 10.10.10.2 255.255.255.252
+no shut
+clock rate 2000000
+
+ena
+conf t
+host JAKARTA
+int fa0/0
+ip add 192.168.10.1 255.255.255.0
+no shut
+int se2/0
+ip add 10.10.10.2 255.255.255.0
+no shut
+clock rate 2000000
+
+
+menghapus : pastikan di privilage)
+erase start
+reload
+
+.. router ke router (2 roueter 2 pc)
+.router 1
+ena
+conf t
+host bandung
+int fa0/0
+ip add 10.10.10.1 255.255.255.0
+no shut
+int se2/0
+ip add 30.30.30.1 255.255.255.0
+clock rate 2000000
+no shut
+exit 
+.router 2
+conf t
+host cirebon
+int fa0/0
+ip add 10.10.10.1 255.255.255.0
+no shut
+
+.. membuat banner
+ena 
+conf t
+banner motd?
+
+
+KOMPETENSI H-1
+
+
+
